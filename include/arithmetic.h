@@ -15,11 +15,11 @@ struct Lexem {
 
 
 class Arithmetic {
-    std::string string;
+    std::string str;
     std::vector<Lexem> postfix;
     double result;
     std::pair<int, std::string> error;
-    void Convert(std::string str);
+    void Convert(std::string string);
     double Calculate();
 public:
     Arithmetic(std::string str);

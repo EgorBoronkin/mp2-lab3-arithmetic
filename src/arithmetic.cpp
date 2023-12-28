@@ -2,16 +2,16 @@
 
 
 
-Arithmetic::Arithmetic(std::string str) : string(str)
+Arithmetic::Arithmetic(std::string string) : str(string)
 {
 
 }
 
 
 
-void Arithmetic::Convert(std::string str)
+void Arithmetic::Convert(std::string string)
 {
-	int size = str.size();
+	int size = string.length();
 	std::string buffer;
 	Stack<Lexem> stack;
 	bool flag = 0;
@@ -19,11 +19,11 @@ void Arithmetic::Convert(std::string str)
 	{
 		
 		buffer = "";
-		while (i < size && '0' <= str[i] && str[i] <= '9' || str[i] == '.')
+		while (i < size && '0' <= string[i] && string[i] <= '9' || string[i] == '.')
 		{
-			if (buffer.size() == 0 && str[i] == '.')
+			if (buffer.size() == 0 && string[i] == '.')
 				throw error = { i,"Wrong Number" };
-			buffer += str[i++];
+			buffer += string[i++];
 		}
 		if (buffer.size() != 0)
 		{
@@ -38,10 +38,10 @@ void Arithmetic::Convert(std::string str)
 			break;
 		//---------------------------------------------------
 
-		if (str[i] == '+' || str[i] == '*' || str[i] == '-' || str[i] == '/')
+		if (string[i] == '+' || string[i] == '*' || string[i] == '-' || string[i] == '/')
 		{
 
-			if (str[i] == '-' && (i == 0 || str[i - 1] == '('))
+			if (string[i] == '-' && (i == 0 || string[i - 1] == '('))
 			{
 				flag = 1;
 				continue;
@@ -54,20 +54,20 @@ void Arithmetic::Convert(std::string str)
 				postfix.push_back(a);
 			}
 			Lexem a;
-			a.op = str[i];
+			a.op = string[i];
 			a.isOp = 1;
 			a.pos = i;
 			stack.push(a);
 		}
-		else if (str[i] == '(')
+		else if (string[i] == '(')
 		{
 			Lexem a;
-			a.op = str[i];
+			a.op = string[i];
 			a.isOp = 1;
 			a.pos = i;
 			stack.push(a);
 		}
-		else if (str[i] == ')')
+		else if (string[i] == ')')
 		{
 			while (!stack.isEmpty() && stack.Top().op != '(')
 			{
@@ -166,7 +166,7 @@ std::pair<double, int> Arithmetic::Execution()
 	double x = 0;
 	try
 	{
-		Convert(string);
+		Convert(str);
 		x = Calculate();
 	}
 	catch (std::pair<int, std::string> Error)

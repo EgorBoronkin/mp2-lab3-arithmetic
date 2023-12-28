@@ -12,13 +12,13 @@ template <class T>
 class Stack {
     T* data;
     int size_data;
-    int top; // stack is empty -> top = -1
+    int top; 
 public:
 
-    Stack(int s_d = 10) : size_data(s_d)
+    Stack(int SD = 10) : size_data(SD)
     {
         if (size_data <= 0)
-            throw "Wrong size";
+            throw "Size isn`t correct";
         data = new T[size_data];
         top = -1;
     }

@@ -1,73 +1,73 @@
 #include "stack.h"
 #include <gtest.h>
 
-TEST(stack, can_create_stack)
+TEST(stack, creating_stack_is_right)
 {
-	ASSERT_NO_THROW(Stack<int> st(10));
+	ASSERT_NO_THROW(Stack<int> stack(10));
 }
 
-TEST(stack, cant_create_stack_with_negative_length)
+TEST(stack, pushing_is_right)
 {
-	ASSERT_ANY_THROW(Stack<int> st(-1));
+	Stack<int> stack(10);
+	ASSERT_NO_THROW(stack.push(1));
 }
 
-TEST(stack, can_push_element)
+TEST(stack, no_negative_length)
 {
-	Stack<int> st(10);
-	ASSERT_NO_THROW(st.push(1));
+	ASSERT_ANY_THROW(Stack<int> stack(-1));
 }
 
-TEST(stack, can_push_element_over_limit)
+TEST(stack, getting_top_elem_is_right)
 {
-	Stack<int> st(1);
-	st.push(1);
-	ASSERT_NO_THROW(st.push(1));
+	Stack<int> stack(1);
+	stack.push(1);
+	EXPECT_EQ(1, stack.Top());
 }
 
-TEST(stack, can_get_top_element)
+TEST(stack, over_limit_pushing_is_good)
 {
-	Stack<int> st(1);
-	st.push(1);
-	EXPECT_EQ(1, st.Top());
+	Stack<int> stack(1);
+	stack.push(1);
+	ASSERT_NO_THROW(stack.push(1));
 }
 
-TEST(stack, cant_top_on_empty_stack)
+TEST(stack, no_topping_on_empty_stack)
 {
-	Stack<int> st(1);
-	st.push(1);
-	st.pop();
-	ASSERT_ANY_THROW(st.Top());
+	Stack<int> stack(1);
+	stack.push(1);
+	stack.pop();
+	ASSERT_ANY_THROW(stack.Top());
 }
 
-TEST(stack, can_pop_element)
+TEST(stack, popping_is_right)
 {
-	Stack<int> st(1);
-	st.push(1);
-	st.push(2);
+	Stack<int> stack(1);
+	stack.push(1);
+	stack.push(2);
 
-	st.pop();
-	EXPECT_EQ(1, st.Top());
+	stack.pop();
+	EXPECT_EQ(1, stack.Top());
 }
 
-TEST(stack, can_pop_empty_stack)
+TEST(stack, popping_empty_stack)
 {
-	Stack<int> st(1);
-	st.push(1);
-	st.pop();
-	ASSERT_NO_THROW(st.pop());
+	Stack<int> stack(1);
+	stack.push(1);
+	stack.pop();
+	ASSERT_NO_THROW(stack.pop());
 }
 
-TEST(stack, empty_show_flase_on_full_stack)
+TEST(stack, empty_false_when_stack_is_full)
 {
-	Stack<int> st(1);
-	st.push(1);
-	EXPECT_NE(true, st.isEmpty());
+	Stack<int> stack(1);
+	stack.push(1);
+	EXPECT_NE(true, stack.isEmpty());
 }
 
-TEST(stack, empty_show_true_on_empty_stack)
+TEST(stack, empty_true_when_stack_is_empty)
 {
-	Stack<int> st(1);
-	st.push(1);
-	st.pop();
-	EXPECT_NE(false, st.isEmpty());
+	Stack<int> stack(1);
+	stack.push(1);
+	stack.pop();
+	EXPECT_NE(false, stack.isEmpty());
 }
